@@ -165,14 +165,15 @@ bot.dialog('/', [
         session.send(msg);
         session.send("Hi... I am the GMI_Bot. Thanks for installing me. ");
         session.beginDialog('/menu');
-		
-		 request.query("Select Max(UserID) from SalesLT.Log").then(function (result) {
-            	session.send(result);
+
+		request = new sql.Request();
+		 request.query("Select Max(UserID) from SalesLT.Log").then(function (recordSet) {
+            	session.send(recordSet);
         }).catch(function (err) {
 	      session.send(err);
         });
 
-        }
+        
     );
     },
     // function (session, results) {
