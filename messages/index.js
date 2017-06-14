@@ -197,6 +197,7 @@ bot.dialog('/menu', [
     }
 ]).reloadAction('reloadMenu', null, { matches: /^menu|show menu/i });
 function saveuserinput(session,result,resultentity){
+	session.send("result" + result);
 		var date = new Date();
 	   request = new sql.Request();
 	   request.query("Insert into [SalesLT].[Log] (InputID,Input,CreatedOn) values ('"+result+"','"+resultentity+"','"+date+"')")
