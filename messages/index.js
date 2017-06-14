@@ -196,32 +196,33 @@ bot.dialog('/menu', [
         session.replaceDialog('/menu');
     }
 ]).reloadAction('reloadMenu', null, { matches: /^menu|show menu/i });
-function saveuserinput(session,result,resultentity){
-	
-	switch(resultentity) {
-    case "About_GMI":
-			session.send("result" + resultentity);
-           InsertUserData(1,resultentity);
-        break;
-    case "About_You":
-           InsertUserData(2,resultentity);
-        break;
-	case "Clickn_Play":
-        InsertUserData(3,resultentity);
-        break;
-
-         }
-	}
-	function InsertUserData(InputID,Input){
+   function insertuserdata(InputID,Input){
 	session.send("result" + InputID);
 	   var date = new Date();
 	   request = new sql.Request();
-	   request.query("Insert into [SalesLT].[Log] (InputID,Input,CreatedOn) values ('"+InputID+"','"+Input+"','"+date+"')")
+	   request.query("Insert into [SalesLT].[Log] (InputID,Input,CreatedOn) values ('"+ parseInt(InputID) +"','"+Input+"','"+date+"')")
 	  .then(function () {
 	  }).catch(function (err) {
 			session.send("Insert err " + err);
 	  });
 	}
+function saveuserinput(session,result,resultentity){
+	
+	switch(resultentity) {
+    case "About_GMI":
+			session.send("result" + resultentity);
+           insertuserdata('1',resultentity);
+        break;
+    case "About_You":
+           insertuserdata('2',resultentity);
+        break;
+	case "Clickn_Play":
+        insertuserdata('3',resultentity);
+        break;
+
+         }
+	}
+	
 bot.dialog('/help', [
     function (session) {
         session.endDialog("Global commands that are available anytime:\n\n* menu - Exits a play session and returns to the menu.\n* goodbye - End this conversation.\n* help - Displays these commands.");
