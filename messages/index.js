@@ -8,7 +8,17 @@ http://docs.botframework.com/builder/node/guides/understanding-natural-language/
 var builder = require("botbuilder");
 var botbuilder_azure = require("botbuilder-azure");
 var path = require('path');
-
+var sql = require('mssql');
+var config = {
+  user: 'gmi', // update me
+  password: 'sa@12345', // update me
+  server: 'gmiinterview.database.windows.net',
+  database: 'gmiinterview',
+  options: {
+	  encrypt : true
+       //update me
+  }
+}
 // var fetch = require('node-fetch');
 // var express = require('express');
 // var app = express();
