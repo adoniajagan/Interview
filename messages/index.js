@@ -264,13 +264,13 @@ bot.dialog('/About_You', [
         builder.Prompts.text(session, "Could you please tell me about yourself in two sentences?");
     },
     function (session, results) {
-		saveusersubinput(session,'2','1','About_You',results.response,candscore);
+		saveusersubinput(session,'2','1','About_You',results.response,'0');
         builder.Prompts.text(session, "Thanks! Could you define success?");
     },
     function (session, results) {
 	 session.send("Okay, let's chat!" + results.response);
         var style = builder.ListStyle["button"];
-		saveusersubinput(session,'2','2','About_You',results.response,candscore);
+		saveusersubinput(session,'2','2','About_You',results.response,'0');
     	builder.Prompts.choice(session, "Who is the most inspirational personality to you among these 4?", "Narayana Murthi|Steve Jobs|Bill Gates|Elon Musk", { listStyle: style });
     },
     function (session, results) {
@@ -287,6 +287,7 @@ bot.dialog('/About_You', [
     function (session, results) {
         var style = builder.ListStyle["button"];
         session.send("Ok! noted! '%s'", results.response);
+		saveusersubinput(session,'2','4','About_You',results.response,'0');
         builder.Prompts.choice(session, "How comfortable would you be to work in an R&I environment?", "Very comfortable|Okay|Not comfortable", { listStyle: style });
     },
     function (session, results) {
@@ -297,6 +298,7 @@ bot.dialog('/About_You', [
         } else {
             candscore -= 10
         }
+		saveusersubinput(session,'2','4','About_You',results.response.entity,candscore);
         var style = builder.ListStyle["button"];
     //    session.send("Ok! noted! '%s'", results.response);
         builder.Prompts.choice(session, "If the job is offered, will you be willing to relocate closer to Siruseri?", "Yes|No", { listStyle: style });
@@ -307,6 +309,7 @@ bot.dialog('/About_You', [
         } else {
             candscore -= 20;
         }
+		saveusersubinput(session,'2','5','About_You',results.response.entity,candscore);
         session.send("Thanks for your responses.");
         if (candscore > 50) {
             session.send("Based on our conversation, we assess a fit. Our HR representative will contact you to schedule for the next round of interview.", candscore);
