@@ -201,7 +201,6 @@ function saveuserinput(session,result,resultentity){
 	
 	switch(resultentity) {
     case "About_GMI":
-			session.send("result" + resultentity);
            insertuserdata(session,'1',resultentity);
         break;
     case "About_You":
