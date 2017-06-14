@@ -6,6 +6,7 @@ http://docs.botframework.com/builder/node/guides/understanding-natural-language/
 -----------------------------------------------------------------------------*/
 "use strict";
 var request;
+var userid;
 var builder = require("botbuilder");
 var botbuilder_azure = require("botbuilder-azure");
 var path = require('path');
@@ -164,6 +165,19 @@ bot.dialog('/', [
         session.send(msg);
         session.send("Hi... I am the GMI_Bot. Thanks for installing me. ");
         session.beginDialog('/menu');
+		
+		request = new Request("Select Max(UserID) from SalesLT.Log",
+        function(err, rowCount, rows) {
+		session.send(session, rowCount);
+		
+		 request.query("Select Max(UserID) from SalesLT.Log").then(function (recordSet) {
+            	session.send(recordSet);
+        }).catch(function (err) {
+	      session.send(err);
+        });
+
+        }
+    );
     },
     // function (session, results) {
     //     // Display menu
