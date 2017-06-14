@@ -268,7 +268,9 @@ bot.dialog('/About_You', [
         builder.Prompts.text(session, "Thanks! Could you define success?");
     },
     function (session, results) {
+	 session.send("Okay, let's chat!" + results.response);
         var style = builder.ListStyle["button"];
+		saveusersubinput(session,'2','2','About_You',results.response);
     	builder.Prompts.choice(session, "Who is the most inspirational personality to you among these 4?", "Narayana Murthi|Steve Jobs|Bill Gates|Elon Musk", { listStyle: style });
     },
     function (session, results) {
