@@ -257,7 +257,7 @@ bot.dialog('/About_You', [
         builder.Prompts.text(session, "Could you please tell me about yourself in two sentences?");
     },
     function (session, results) {
-    //    session.send("You said '%s'", results.response);
+        session.send("You said '%s'", results.response);
         builder.Prompts.text(session, "Thanks! Could you define success?");
     },
     function (session, results) {
