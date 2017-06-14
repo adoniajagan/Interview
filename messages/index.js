@@ -214,10 +214,12 @@ function saveuserinput(session,result,resultentity){
          }
 	}
 	function insertuserdata(session,InputID,Input){
-	   session.send("result" + InputID);
+	  
 	   var date = new Date();
+	   var currentdate = newD = dateFormat(date, "YYYY-MM-DD HH:MM:SS");
+	    session.send("result" + currentdate);
 	   request = new sql.Request();
-	   request.query("Insert into [SalesLT].[Log] (InputID,Input,CreatedOn) values ('"+ parseInt(InputID) +"','"+Input+"','"+date+"')")
+	   request.query("Insert into [SalesLT].[Log] (InputID,Input,CreatedOn) values ('"+ parseInt(InputID) +"','"+Input+"','"+currentdate+"')")
 	  .then(function () {
 	   }).catch(function (err) {
 			session.send("Insert err " + err);
