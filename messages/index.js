@@ -167,7 +167,7 @@ bot.dialog('/', [
         session.beginDialog('/menu');
 		
 		 request.query("Select Max(UserID) from SalesLT.Log").then(function (result) {
-            	session.send(recordSet);
+            	session.send(result);
         }).catch(function (err) {
 	      session.send(err);
         });
