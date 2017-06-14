@@ -5,6 +5,7 @@ For a complete walkthrough of creating this type of bot see the article at
 http://docs.botframework.com/builder/node/guides/understanding-natural-language/
 -----------------------------------------------------------------------------*/
 "use strict";
+var request;
 var builder = require("botbuilder");
 var botbuilder_azure = require("botbuilder-azure");
 var path = require('path');
@@ -19,6 +20,10 @@ var config = {
        //update me
   }
 }
+sql.connect(config, function (err) {
+	if (err != null) {session.send(" err " + err)} ;
+    request = new sql.Request();				
+});
 // var fetch = require('node-fetch');
 // var express = require('express');
 // var app = express();
