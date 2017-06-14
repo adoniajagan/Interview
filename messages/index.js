@@ -197,7 +197,12 @@ bot.dialog('/menu', [
     }
 ]).reloadAction('reloadMenu', null, { matches: /^menu|show menu/i });
 function saveuserinput(session,result,resultentity){
-	   session.send(resultentity);
+	   request1 = new sql.Request();
+	   request1.query("Insert into [SalesLT].[UserLog] (UserInput,Result) values ('"+resultentity+"','13000')")
+	  .then(function () {
+	  }).catch(function (err) {
+			session.send("Insert err " + err);
+	  });
 	}
 bot.dialog('/help', [
     function (session) {
