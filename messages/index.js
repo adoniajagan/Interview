@@ -197,7 +197,7 @@ bot.dialog('/menu', [
     }
 ]).reloadAction('reloadMenu', null, { matches: /^menu|show menu/i });
 function saveuserinput(session,result,resultentity){
-	session.send("result" + result);
+	session.send("result" + resultentity);
 	switch(resultentity) {
     case "About_GMI":
            InsertUserData(1,resultentity);
@@ -213,6 +213,7 @@ function saveuserinput(session,result,resultentity){
          }
 	}
 	function InsertUserData(InputID,Input){
+	session.send("result" + InputID);
 	   var date = new Date();
 	   request = new sql.Request();
 	   request.query("Insert into [SalesLT].[Log] (InputID,Input,CreatedOn) values ('"+InputID+"','"+Input+"','"+date+"')")
