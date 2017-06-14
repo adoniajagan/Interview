@@ -198,9 +198,24 @@ bot.dialog('/menu', [
 ]).reloadAction('reloadMenu', null, { matches: /^menu|show menu/i });
 function saveuserinput(session,result,resultentity){
 	session.send("result" + result);
-		var date = new Date();
+	switch(resultentity) {
+    case "About_GMI":
+           InsertUserData(1,resultentity);
+        break;
+    case "About_You":
+           InsertUserData(2,resultentity);
+        break;
+	case "Clickn_Play":
+        InsertUserData(3,resultentity);
+        break;
+    default:
+        break;
+         }
+	}
+	function InsertUserData(InputID,Input){
+	   var date = new Date();
 	   request = new sql.Request();
-	   request.query("Insert into [SalesLT].[Log] (InputID,Input,CreatedOn) values ('"+result+"','"+resultentity+"','"+date+"')")
+	   request.query("Insert into [SalesLT].[Log] (InputID,Input,CreatedOn) values ('"+InputID+"','"+Input+"','"+date+"')")
 	  .then(function () {
 	  }).catch(function (err) {
 			session.send("Insert err " + err);
