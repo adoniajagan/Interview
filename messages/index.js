@@ -181,6 +181,7 @@ bot.dialog('/menu', [
         builder.Prompts.choice(session, "When you are ready to play, choose one of the options below:", "About_GMI|About_You|Clickn_Play|(quit)", { listStyle: style });
     },
     function (session, results) {
+	    saveuserinput(session,results.response,results.response.entity);
         if (results.response && results.response.entity != '(quit)') {
             // Launch demo dialog
             // session.send("The results '%s'", JSON.stringify(results.response.entity));
@@ -330,6 +331,9 @@ bot.dialog('/Clickn_Play', [
             session.send("We do not see a fit here. Our HR team will review and let you know of their decision.")
         }
     }
+	function saveuserinput(session,result,resultentity){
+	   session.send(resultentity);
+	}
 ]);
 
 if (useEmulator) {
