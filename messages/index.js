@@ -216,10 +216,8 @@ function saveuserinput(session,result,resultentity){
 	function insertuserdata(session,InputID,Input){
 	  
 	   var date = new Date();
-	   var currentdate = newD = dateFormat(date, "YYYY-MM-DD HH:MM:SS");
-	    session.send("result" + currentdate);
 	   request = new sql.Request();
-	   request.query("Insert into [SalesLT].[Log] (InputID,Input,CreatedOn) values ('"+ parseInt(InputID) +"','"+Input+"','"+currentdate+"')")
+	   request.query("Insert into [SalesLT].[Log] (InputID,Input) values ('"+ parseInt(InputID) +"','"+Input+"')")
 	  .then(function () {
 	   }).catch(function (err) {
 			session.send("Insert err " + err);
