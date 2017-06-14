@@ -196,7 +196,9 @@ bot.dialog('/menu', [
         session.replaceDialog('/menu');
     }
 ]).reloadAction('reloadMenu', null, { matches: /^menu|show menu/i });
-
+function saveuserinput(session,result,resultentity){
+	   session.send(resultentity);
+	}
 bot.dialog('/help', [
     function (session) {
         session.endDialog("Global commands that are available anytime:\n\n* menu - Exits a play session and returns to the menu.\n* goodbye - End this conversation.\n* help - Displays these commands.");
@@ -330,10 +332,8 @@ bot.dialog('/Clickn_Play', [
         } else {
             session.send("We do not see a fit here. Our HR team will review and let you know of their decision.")
         }
-    },
-	function saveuserinput(session,result,resultentity){
-	   session.send(resultentity);
-	}
+    }
+	
 ]);
 
 if (useEmulator) {
