@@ -167,9 +167,10 @@ bot.dialog('/', [
 		request = new sql.Request();
 		request.query("Select Max(UserID) as UserID from SalesLT.Log")
 		.then(function (err, result) {
-				session.send(""+result);
-				var carId = result.UserID;
-				 session.send(""+carId);
+				session.send(""+results.rows.length);
+				 for (var i = 0; i < results.rows.length; i++) {
+            
+                 }
 		}).catch(function (err) {
 			session.send("Insert err " + err);
 		});
