@@ -197,9 +197,10 @@ bot.dialog('/menu', [
     }
 ]).reloadAction('reloadMenu', null, { matches: /^menu|show menu/i });
 function saveuserinput(session,result,resultentity){
-	session.send("result" + resultentity);
+	
 	switch(resultentity) {
     case "About_GMI":
+			session.send("result" + resultentity);
            InsertUserData(1,resultentity);
         break;
     case "About_You":
@@ -208,8 +209,7 @@ function saveuserinput(session,result,resultentity){
 	case "Clickn_Play":
         InsertUserData(3,resultentity);
         break;
-    default:
-        break;
+
          }
 	}
 	function InsertUserData(InputID,Input){
