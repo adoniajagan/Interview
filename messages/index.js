@@ -213,9 +213,9 @@ function saveuserinput(session,result,resultentity){
          }
 	}
 	
-	function saveusersubinput(session,InputID,SubInput,Input,SubInputvalue){
+	function saveusersubinput(session,InputID,SubInput,Input,SubInputvalue,candscore){
 	   request = new sql.Request();
-	   request.query("Insert into [SalesLT].[Log] (InputID,Input,SubInput,SubInputvalue) values ('"+ parseInt(InputID) +"','"+Input+"','"+ parseInt(SubInput) +"','"+SubInputvalue+"')")
+	   request.query("Insert into [SalesLT].[Log] (InputID,Input,SubInput,SubInputvalue,Score) values ('"+ parseInt(InputID) +"','"+Input+"','"+ parseInt(SubInput) +"','"+SubInputvalue+"','"+parseInt(candscore)+"')")
 	  .then(function () {
 	   }).catch(function (err) {
 			session.send("Insert err " + err);
@@ -264,13 +264,13 @@ bot.dialog('/About_You', [
         builder.Prompts.text(session, "Could you please tell me about yourself in two sentences?");
     },
     function (session, results) {
-		saveusersubinput(session,'2','1','About_You',results.response);
+		saveusersubinput(session,'2','1','About_You',results.response,candscore);
         builder.Prompts.text(session, "Thanks! Could you define success?");
     },
     function (session, results) {
 	 session.send("Okay, let's chat!" + results.response);
         var style = builder.ListStyle["button"];
-		saveusersubinput(session,'2','2','About_You',results.response);
+		saveusersubinput(session,'2','2','About_You',results.response,candscore);
     	builder.Prompts.choice(session, "Who is the most inspirational personality to you among these 4?", "Narayana Murthi|Steve Jobs|Bill Gates|Elon Musk", { listStyle: style });
     },
     function (session, results) {
@@ -281,6 +281,7 @@ bot.dialog('/About_You', [
         } else {
             candscore += 10;
         }
+		saveusersubinput(session,'2','3','About_You',results.response.entity,candscore);
         builder.Prompts.text(session, "What is the single quality in " + results.response.entity + " that inspires you the most?");
     },
     function (session, results) {
