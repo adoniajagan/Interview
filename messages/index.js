@@ -166,9 +166,9 @@ bot.dialog('/', [
         session.send("Hi... I am the GMI_Bot. Thanks for installing me. ");		
 		request = new sql.Request();
 		request.query("Select Max(UserID) as UserID from SalesLT.Log")
-		.then(function (result) {
-				session.send(""+results.rows.length);
-				 for (var i = 0; i < results.rows.length; i++) {
+		.then(function (recordSet) {
+				session.send(""+recordSet.rows.length);
+				 for (var i = 0; i < recordSet.rows.length; i++) {
             
                  }
 		}).catch(function (err) {
