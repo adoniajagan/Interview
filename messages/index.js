@@ -165,8 +165,13 @@ bot.dialog('/', [
         session.send(msg);
         session.send("Hi... I am the GMI_Bot. Thanks for installing me. ");
         session.beginDialog('/menu');
+		
+		request = new Request("Select Max(UserID) from SalesLT.Log",
+        function(err, result) {
+		     session.send(result);
+		
 
-    );
+        });
     },
     // function (session, results) {
     //     // Display menu
