@@ -209,14 +209,21 @@ function saveuserinput(session,result,resultentity){
 	case "Clickn_Play":
         insertuserdata(session,'3',resultentity);
         break;
-
+     
          }
 	}
-	function insertuserdata(session,InputID,Input){
-	  
-	   var date = new Date();
+	
+	function saveusersubinput(session,InputID,SubInput,Input,SubInputvalue){
 	   request = new sql.Request();
-	   request.query("Insert into [SalesLT].[Log] (InputID,Input) values ('"+ parseInt(InputID) +"','"+Input+"')")
+	   request.query("Insert into [SalesLT].[Log] (InputID,Input,SubInput,SubInputvalue) values ('"+ parseInt(InputID) +"','"+Input+"','"+ parseInt(SubInput) +"','"+SubInputvalue+"')")
+	  .then(function () {
+	   }).catch(function (err) {
+			session.send("Insert err " + err);
+	   });
+	}
+	function insertuserdata(session,InputID,Input){
+	   request = new sql.Request();
+	   request.query("Insert into [SalesLT].[Log] (InputID,Input,SubInput,SubInputvalue) values ('"+ parseInt(InputID) +"','"+Input+"',0,'')")
 	  .then(function () {
 	   }).catch(function (err) {
 			session.send("Insert err " + err);
@@ -257,7 +264,7 @@ bot.dialog('/About_You', [
         builder.Prompts.text(session, "Could you please tell me about yourself in two sentences?");
     },
     function (session, results) {
-        session.send("You said '%s'", results.response);
+		saveusersubinput(session,'2','1','About_You',results.response);
         builder.Prompts.text(session, "Thanks! Could you define success?");
     },
     function (session, results) {
