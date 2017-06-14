@@ -163,8 +163,7 @@ bot.dialog('/', [
             ]);
         var msg = new builder.Message(session).attachments([card]);
         session.send(msg);
-        session.send("Hi... I am the GMI_Bot. Thanks for installing me. ");
-        session.beginDialog('/menu');
+        session.send("Hi... I am the GMI_Bot. Thanks for installing me. ");		
 		request = new sql.Request();
 		request.query("Select Max(UserID) from SalesLT.Log")
 		.then(function (err, result) {
@@ -172,6 +171,9 @@ bot.dialog('/', [
 		}).catch(function (err) {
 			session.send("Insert err " + err);
 		});
+		
+        session.beginDialog('/menu');
+
     },
     // function (session, results) {
     //     // Display menu
