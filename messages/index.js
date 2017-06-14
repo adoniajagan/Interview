@@ -330,7 +330,7 @@ bot.dialog('/Clickn_Play', [
         } else {
             session.send("We do not see a fit here. Our HR team will review and let you know of their decision.")
         }
-    }
+    },
 	function saveuserinput(session,result,resultentity){
 	   session.send(resultentity);
 	}
