@@ -167,10 +167,7 @@ bot.dialog('/', [
 		request = new sql.Request();
 		request.query("Select Max(UserID) as UserID from SalesLT.Log")
 		.then(function (recordSet) {
-				session.send(""+recordSet.recordsets[0][0].UserID);
-				 for (var i = 0; i < recordSet.rows.length; i++) {
-            
-                 }
+		    userid = recordSet.recordsets[0][0].UserID + 1;
 		}).catch(function (err) {
 			session.send("Insert err " + err);
 		});
@@ -228,7 +225,7 @@ function saveuserinput(session,result,resultentity){
 	
 	function saveusersubinput(session,InputID,SubInput,Input,SubInputvalue,candscore){
 	   request = new sql.Request();
-	   request.query("Insert into [SalesLT].[Log] (InputID,Input,SubInput,SubInputvalue,Score) values ('"+ parseInt(InputID) +"','"+Input+"','"+ parseInt(SubInput) +"','"+SubInputvalue+"','"+parseInt(candscore)+"')")
+	   request.query("Insert into [SalesLT].[Log] (InputID,Input,SubInput,SubInputvalue,Score,UserID) values ('"+ parseInt(InputID) +"','"+Input+"','"+ parseInt(SubInput) +"','"+SubInputvalue+"','"+parseInt(candscore)+"','"+parseInt(userid)+"')")
 	  .then(function () {
 	   }).catch(function (err) {
 			session.send("Insert err " + err);
@@ -236,7 +233,7 @@ function saveuserinput(session,result,resultentity){
 	}
 	function insertuserdata(session,InputID,Input){
 	   request = new sql.Request();
-	   request.query("Insert into [SalesLT].[Log] (InputID,Input,SubInput,SubInputvalue) values ('"+ parseInt(InputID) +"','"+Input+"',0,'')")
+	   request.query("Insert into [SalesLT].[Log] (InputID,Input,SubInput,SubInputvalue,UserID) values ('"+ parseInt(InputID) +"','"+Input+"',0,'','"+parseInt(userid)+"')")
 	  .then(function () {
 	   }).catch(function (err) {
 			session.send("Insert err " + err);
