@@ -14,8 +14,8 @@ var sql = require('mssql');
 var config = {
   user: 'gmi', // update me
   password: 'sa@12345', // update me
-  server: 'gmiinterview.database.windows.net',
-  database: 'gmiinterview',
+  server: 'gmidatabase.database.windows.net',
+  database: 'GMI',
   options: {
 	  encrypt : true
        //update me
@@ -67,6 +67,7 @@ var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure
 var bot = new builder.UniversalBot(connector);
 //bot.localePath(path.join(__dirname, './locale'));
 var candscore = 30;
+var candiatescore = 0;
 // Make sure you add code to validate these fields
 var luisAppId = process.env.LuisAppId;
 var luisAPIKey = process.env.LuisAPIKey;
